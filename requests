@@ -1,0 +1,67 @@
+1、安装
+
+	pip install requests
+
+2、测试
+
+	import requests   #导入requests库
+
+	r = requests.get("http://www.baidu.com")   #利用requests.get获取网页内容
+
+	r.status_code    #查看页面返回值
+
+	r.encoding = 'utf-8'   #修改编码方式
+
+	r.text      #打印内容
+
+
+3、requests的五种属性：
+
+	r.status_code  #返回状态
+
+	r.text    #返回页面内容
+
+	r.encoding  #返回head猜测内容编码方式
+
+	r.apparent_encoding  #内容编码方式
+
+	r.content	#内容二进制
+
+4、爬取网页通用代码框架：
+
+	r.raise_for_status()   #判断返回的值是否是200，如果不是200，
+				则产生一个httperror的异常
+
+	import requests
+
+	def getHTMLText(url):
+	    try:
+	       r = requests.get(url,timeout=30)
+	       r.raise_for_status()
+	       r.encoding=r.apparent_encoding
+	       return r.text
+	    except:
+	       return "产生异常"
+
+	if _name_ == "_main_":             #封装成一个函数
+	   url = "http://www.baidu.com"
+	   print(getHTMLText(url))
+
+
+5、查看robots协议
+
+	https://www.jd.com/robots.txt
+
+6、实例
+
+
+	京东商品页面的爬取：
+	   https://item.jd.com/2967929.html
+
+
+	import requests
+	r=requests.get("https://item.jd.com/2967929.html")
+	r.status_code
+	
+	r.encoding
+	r.text[:1000]
