@@ -25,3 +25,6 @@ export PATH=/usr/local/python3/bin/:$PATH
 5.测试
 
 python3.6
+
+6.安装ipyhon
+直接用yum
